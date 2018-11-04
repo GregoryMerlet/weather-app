@@ -12,13 +12,17 @@ import { HomePage } from '../pages/home/home';
 import { WeatherDetailsPage} from "../pages/weather-details/weather-details";
 import { WeatherProvider } from '../providers/weather/weather';
 import { WeatherMinComponent } from "../components/weather-min/weather-min";
+import {GetWeekDayPipe} from "../pipes/get-week-day/get-week-day";
+import {GetIconPipe} from "../pipes/get-icon/get-icon";
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     WeatherDetailsPage,
-    WeatherMinComponent
+    WeatherMinComponent,
+    GetWeekDayPipe,
+    GetIconPipe
   ],
   imports: [
     BrowserModule,

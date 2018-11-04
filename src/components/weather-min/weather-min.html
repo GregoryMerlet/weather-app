@@ -2,7 +2,7 @@
   <button ion-item>
     <ion-item style="background: rgba(0,0,0,0);">
       <img
-        [src]="getImageSrc(weatherIcon)"
+        [src]="weatherIcon | getIcon"
         class="weather-min-image"/>
       <div class="weather-min-text">
         <p class="cityName">{{cityName}}</p>

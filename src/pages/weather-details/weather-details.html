@@ -1,9 +1,3 @@
-<!--
-  Generated template for the WeatherDetailsPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -15,6 +9,15 @@
 
 <ion-content padding>
   <h1>{{weatherInfos.name}}</h1>
-  <h3>{{weatherInfos.weather[0].main}}</h3>
+  <h3>{{weatherInfos.weather[0].description}}</h3>
   <h1>{{weatherInfos.main.temp}}°C</h1>
+  <ion-list>
+    <ion-item *ngFor="let day of weatherForecast">
+      <p>{{day.dt | getWeekDay}}</p>
+      <img
+        [src]="day.weather[0].icon | getIcon"
+        class="weather-min-image"/>
+      <p>{{day.main.temp}}°C</p>
+    </ion-item>
+  </ion-list>
 </ion-content>
