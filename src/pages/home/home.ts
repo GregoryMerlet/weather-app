@@ -17,11 +17,11 @@ export class HomePage {
   }
 
   ionViewWillEnter() {
-    this.getWeather("London");
+    this.getWeather();
   }
 
-  getWeather(city: string) {
-    this.weather.getCityWeather(city)
+  getWeather() {
+    this.weather.getCityWeather('43.606381', '6.684486')
       .subscribe(
         result => this.cityWeather = result,
         error => this.errorMessage = <any>error);

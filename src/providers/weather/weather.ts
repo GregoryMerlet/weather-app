@@ -19,9 +19,10 @@ export class WeatherProvider {
     console.log('Hello WeatherProvider Provider');
   }
 
-  getCityWeather(city: string): Observable<{}> {
+  getCityWeather(lat: string, lon: string): Observable<{}> {
     let params = new HttpParams()
-      .set("q",city)
+      .set("lat",lat)
+      .set("lon", lon)
       .set("appid", this.apiKey)
       .set("units", "metric");
     return this.http.get(`${this.apiUrl}weather`, { params: params }).pipe(
