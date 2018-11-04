@@ -7,7 +7,22 @@
 </ion-header>
 
 <ion-content padding>
-  <h2>London</h2>
-  <h3>{{cityWeather?.main}}</h3>
-  <p>{{cityWeather?.description}}</p>
+  <div>
+    <h2>Ma position</h2>
+  </div>
+  <weather-min
+    #weatherMinComponent
+    [cityName]="cityWeather?.name"
+    [weatherIcon]="cityWeather?.weather[0].icon"
+    [temperature]="cityWeather?.main.temp"
+    (click)="itemClick(cityWeather?.id)"></weather-min>
+  <div>
+    <h2>Favoris</h2>
+  </div>
+  <weather-min
+    #weatherMinComponent
+    [cityName]="cityWeather?.name"
+    [weatherIcon]="cityWeather?.weather[0].icon"
+    [temperature]="cityWeather?.main.temp"
+    (click)="itemClick(cityWeather?.id)"></weather-min>
 </ion-content>

@@ -9,11 +9,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { WeatherProvider } from '../providers/weather/weather';
+import { WeatherMinComponent } from "../components/weather-min/weather-min";
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    WeatherMinComponent
   ],
   imports: [
     BrowserModule,
