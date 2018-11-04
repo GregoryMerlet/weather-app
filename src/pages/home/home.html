@@ -19,10 +19,12 @@
   <div>
     <h2>Favoris</h2>
   </div>
-  <weather-min
-    #weatherMinComponent
-    [cityName]="cityWeather?.name"
-    [weatherIcon]="cityWeather?.weather[0].icon"
-    [temperature]="cityWeather?.main.temp"
-    (click)="itemClick(cityWeather?.id)"></weather-min>
+  <div *ngFor="let cW of citiesWeather">
+      <weather-min
+        #weatherMinComponent
+        [cityName]="cW.name"
+        [weatherIcon]="cW.weather[0].icon"
+        [temperature]="cW.main.temp"
+        (click)="itemClick(cW.id)"></weather-min>
+  </div>
 </ion-content>

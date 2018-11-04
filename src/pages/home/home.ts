@@ -9,6 +9,7 @@ import {WeatherProvider} from "../../providers/weather/weather";
 export class HomePage {
 
   cityWeather: any;
+  citiesWeather: any;
   errorMessage: string;
 
   constructor(public navCtrl: NavController, public weather: WeatherProvider) {
@@ -23,6 +24,10 @@ export class HomePage {
     this.weather.getCityWeather(city)
       .subscribe(
         result => this.cityWeather = result,
+        error => this.errorMessage = <any>error);
+    this.weather.getCitiesWeather(['524901','703448','2643743'])
+      .subscribe(
+        citiesWeather => this.citiesWeather = citiesWeather.list,
         error => this.errorMessage = <any>error);
   }
 

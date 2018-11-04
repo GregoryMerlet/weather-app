@@ -12,7 +12,7 @@ import {catchError, map} from "rxjs/operators";
 @Injectable()
 export class WeatherProvider {
 
-  private apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
+  private apiUrl = 'https://api.openweathermap.org/data/2.5/';
   private apiKey = '8bc778bbac5322ebf2cc2ee51724786f';
 
   constructor(public http: HttpClient) {
@@ -24,7 +24,18 @@ export class WeatherProvider {
       .set("q",city)
       .set("appid", this.apiKey)
       .set("units", "metric");
-    return this.http.get(this.apiUrl, { params: params }).pipe(
+    return this.http.get(`${this.apiUrl}weather`, { params: params }).pipe(
+      map(this.extractData),
+      catchError(this.handleError)
+    );
+  }
+
+  getCitiesWeather(cities: Array<string>){
+    let params = new HttpParams()
+      .set("id",cities.toString())
+      .set("appid", this.apiKey)
+      .set("units", "metric");
+    return this.http.get(`${this.apiUrl}group`, { params: params }).pipe(
       map(this.extractData),
       catchError(this.handleError)
     );
