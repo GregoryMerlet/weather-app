@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 /**
  * Generated class for the WeatherMinComponent component.
@@ -15,7 +15,6 @@ export class WeatherMinComponent {
   @Input('cityName') cityName: string;
   @Input('weatherIcon') weatherIcon: string;
   @Input('temperature') temperature: number;
-  imageSrc: string;
 
   constructor() {
   }
@@ -62,11 +61,7 @@ export class WeatherMinComponent {
   }
 
   getImageSrc(icon){
-    return `/assets/imgs/${this.getImageName(icon)}.svg`;
-  }
-
-  ngAfterViewInit(){
-    console.log("test");
+    return `assets/imgs/${this.getImageName(icon)}.svg`;
   }
 
 }

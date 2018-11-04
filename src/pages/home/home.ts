@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Geolocation ,GeolocationOptions ,Geoposition ,PositionError } from '@ionic-native/geolocation';
+
 import {WeatherProvider} from "../../providers/weather/weather";
 
 @Component({
@@ -8,27 +10,52 @@ import {WeatherProvider} from "../../providers/weather/weather";
 })
 export class HomePage {
 
-  cityWeather: any;
-  citiesWeather: any;
+  options : GeolocationOptions;
+  currentPos : Geoposition;
+  localWheather: any;
+  favoriteCitiesWeather: any;
   errorMessage: string;
+  geolocationError: string;
+  localWeatherError: string;
+  favoriteCitiesWeatherError: string;
 
-  constructor(public navCtrl: NavController, public weather: WeatherProvider) {
+  constructor(public navCtrl: NavController, public weather: WeatherProvider, private geolocation: Geolocation) {
 
   }
 
   ionViewWillEnter() {
     this.getWeather();
+    this.getFavoriteCitiesWeather();
   }
 
-  getWeather() {
-    this.weather.getCityWeather('43.606381', '6.684486')
+  getWeather(){
+    this.options = {
+      enableHighAccuracy : true
+    };
+
+    this.geolocation.getCurrentPosition(this.options)
+      .then(
+        (pos : Geoposition) => {
+            this.currentPos = pos;
+            this.getLocalWeather();
+        },
+        (err : PositionError)=> {
+            this.geolocationError = err.message;
+        });
+  }
+
+  getLocalWeather(){
+    this.weather.getCityWeather(this.currentPos.coords.latitude.toString(), this.currentPos.coords.longitude.toString())
       .subscribe(
-        result => this.cityWeather = result,
-        error => this.errorMessage = <any>error);
+        result => this.localWheather = result,
+        error => this.localWeatherError = <any>error);
+  }
+
+  getFavoriteCitiesWeather(){
     this.weather.getCitiesWeather(['524901','703448','2643743'])
       .subscribe(
-        citiesWeather => this.citiesWeather = citiesWeather.list,
-        error => this.errorMessage = <any>error);
+        citiesWeather => this.favoriteCitiesWeather = citiesWeather.list,
+        error => this.favoriteCitiesWeatherError = <any>error);
   }
 
   itemClick(item){

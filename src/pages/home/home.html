@@ -10,21 +10,31 @@
   <div>
     <h2>Ma position</h2>
   </div>
-  <weather-min
-    #weatherMinComponent
-    [cityName]="cityWeather?.name"
-    [weatherIcon]="cityWeather?.weather[0].icon"
-    [temperature]="cityWeather?.main.temp"
-    (click)="itemClick(cityWeather?.id)"></weather-min>
+  <div *ngIf="!geolocationError && !localWeatherError">
+    <ion-spinner *ngIf="!localWheather" name="bubbles" class="spinner-calm"></ion-spinner>
+    <weather-min
+      #weatherMinComponent
+      *ngIf="localWheather"
+      [cityName]="localWheather.name"
+      [weatherIcon]="localWheather.weather[0].icon"
+      [temperature]="localWheather.main.temp"
+      (click)="itemClick(localWheather.id)"></weather-min>
+  </div>
+  <p *ngIf="geolocationError" class="error">Erreur lors de la géolocalisaton</p>
+  <p *ngIf="localWeatherError" class="error">Erreur lors de la récupération des informations météo</p>
   <div>
     <h2>Favoris</h2>
   </div>
-  <div *ngFor="let cW of citiesWeather">
-      <weather-min
-        #weatherMinComponent
-        [cityName]="cW.name"
-        [weatherIcon]="cW.weather[0].icon"
-        [temperature]="cW.main.temp"
-        (click)="itemClick(cW.id)"></weather-min>
+  <div *ngIf="!favoriteCitiesWeatherError">
+    <ion-spinner *ngIf="!favoriteCitiesWeather" name="bubbles" class="spinner-calm"></ion-spinner>
+    <div *ngFor="let city of favoriteCitiesWeather">
+        <weather-min
+          #weatherMinComponent
+          [cityName]="city.name"
+          [weatherIcon]="city.weather[0].icon"
+          [temperature]="city.main.temp"
+          (click)="itemClick(city.id)"></weather-min>
+    </div>
   </div>
+  <p *ngIf="favoriteCitiesWeatherError" class="error">Erreur lors de la récupération des informations météo</p>
 </ion-content>
