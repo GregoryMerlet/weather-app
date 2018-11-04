@@ -9,6 +9,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { WeatherDetailsPage} from "../pages/weather-details/weather-details";
 import { WeatherProvider } from '../providers/weather/weather';
 import { WeatherMinComponent } from "../components/weather-min/weather-min";
 
@@ -16,6 +17,7 @@ import { WeatherMinComponent } from "../components/weather-min/weather-min";
   declarations: [
     MyApp,
     HomePage,
+    WeatherDetailsPage,
     WeatherMinComponent
   ],
   imports: [
@@ -26,7 +28,8 @@ import { WeatherMinComponent } from "../components/weather-min/weather-min";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    WeatherDetailsPage
   ],
   providers: [
     StatusBar,

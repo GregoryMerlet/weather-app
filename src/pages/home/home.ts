@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { Geolocation ,GeolocationOptions ,Geoposition ,PositionError } from '@ionic-native/geolocation';
 
 import {WeatherProvider} from "../../providers/weather/weather";
+import {WeatherDetailsPage} from "../weather-details/weather-details";
 
 @Component({
   selector: 'page-home',
@@ -59,6 +60,10 @@ export class HomePage {
   }
 
   itemClick(item){
-    console.log(item);
+    if(item === -1){
+      this.navCtrl.push(WeatherDetailsPage, {weatherInfos: this.localWheather});
+    } else {
+      this.navCtrl.push(WeatherDetailsPage, {weatherInfos: this.favoriteCitiesWeather[item]});
+    }
   }
 }
