@@ -8,16 +8,21 @@
 
 
 <ion-content padding>
-  <h1>{{weatherInfos.name}}</h1>
-  <h3>{{weatherInfos.weather[0].description}}</h3>
-  <h1>{{weatherInfos.main.temp}}°C</h1>
-  <ion-list>
-    <ion-item *ngFor="let day of weatherForecast">
-      <p>{{day.dt | getWeekDay}}</p>
+  <div id="mainInfos">
+    <h1>{{weatherInfos.name}}</h1>
+    <p id="mainDesc">{{weatherInfos.weather[0].description}}</p>
+    <h1 id="mainTemp">{{weatherInfos.main.temp}}<span id="tempUnit">°C</span></h1>
+  </div>
+  <hr>
+  <ion-list *ngIf="!error">
+    <ion-spinner *ngIf="!weatherForecast" name="bubbles" class="spinner-calm"></ion-spinner>
+    <ion-item *ngFor="let day of weatherForecast" class="forecastDay">
+      <p class="weekDayName">{{day.dt | getWeekDay}}</p>
       <img
         [src]="day.weather[0].icon | getIcon"
-        class="weather-min-image"/>
-      <p>{{day.main.temp}}°C</p>
+        class="weekDayWeather"/>
+      <p class="weekDayTemp">{{day.main.temp}}°C</p>
     </ion-item>
   </ion-list>
+  <p *ngIf="error" class="error">Erreur lors de la récupération des informations météo</p>
 </ion-content>

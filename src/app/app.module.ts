@@ -5,6 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpClientModule } from '@angular/common/http';
 import { Geolocation } from '@ionic-native/geolocation';
+import { File } from '@ionic-native/file';
+import { IonicStorageModule } from '@ionic/storage';
 
 
 import { MyApp } from './app.component';
@@ -14,6 +16,8 @@ import { WeatherProvider } from '../providers/weather/weather';
 import { WeatherMinComponent } from "../components/weather-min/weather-min";
 import {GetWeekDayPipe} from "../pipes/get-week-day/get-week-day";
 import {GetIconPipe} from "../pipes/get-icon/get-icon";
+import {CitySelectPage} from "../pages/city-select/city-select";
+import { FavoriteCitiesProvider } from '../providers/favorite-cities/favorite-cities';
 
 @NgModule({
   declarations: [
@@ -22,25 +26,30 @@ import {GetIconPipe} from "../pipes/get-icon/get-icon";
     WeatherDetailsPage,
     WeatherMinComponent,
     GetWeekDayPipe,
-    GetIconPipe
+    GetIconPipe,
+    CitySelectPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    WeatherDetailsPage
+    WeatherDetailsPage,
+    CitySelectPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     WeatherProvider,
-    Geolocation
+    Geolocation,
+    File,
+    FavoriteCitiesProvider
   ]
 })
 export class AppModule {}

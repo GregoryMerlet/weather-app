@@ -1,3 +1,50 @@
-page-weather-details {
+page-weather-details ion-content{
+  text-align: center;
+}
 
+#mainInfos {
+  padding: 20px;
+}
+
+#mainDesc {
+  margin: 0;
+  font-size: 15pt;
+}
+
+#mainTemp {
+  font-size: 50pt;
+  margin: 0;
+}
+
+#tempUnit {
+  font-size: 20pt;
+  vertical-align: text-top;
+}
+
+.forecastDay {
+  text-align: center;
+  padding: 0;
+  background: none;
+}
+
+.forecastDay *{
+  display: inline-block;
+  width: 100%;
+  font-size: 15pt!important;
+  vertical-align: middle;
+}
+
+.weekDayName {
+  width: 30%;
+  text-align: left;
+}
+
+.weekDayWeather {
+  width: 27%;
+  height: 30px;
+}
+
+.weekDayTemp {
+  width: 30%;
+  text-align: right;
 }

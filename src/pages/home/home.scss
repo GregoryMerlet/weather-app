@@ -1,8 +1,34 @@
+ion-navbar *{
+  background: color($colors, primary)!important;
+  color: color($colors, light)!important;
+}
+
+ion-content{
+  background: color($colors, secondary)!important;
+  text-align: center;
+}
+
 .error {
   color: red;
   text-align: center;
 }
 
+ion-content h2 {
+  text-align: left;
+}
+
+ion-spinner {
+  display: inline-block;
+}
+
 ion-spinner * {
-  fill: #65ccff!important;
+  fill: color($colors, light)!important;
+}
+
+#addButton * {
+  font-size: 30pt!important;
+}
+
+.emptyList {
+  text-align: center;
 }

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Weather forecast
+      Favoris
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -11,7 +11,7 @@
     <h2>Ma position</h2>
   </div>
   <div *ngIf="!geolocationError && !localWeatherError">
-    <ion-spinner *ngIf="!localWheather" name="bubbles" class="spinner-calm"></ion-spinner>
+    <ion-spinner *ngIf="!localWheather" name="bubbles"></ion-spinner>
     <weather-min
       #weatherMinComponent
       *ngIf="localWheather"
@@ -26,7 +26,8 @@
     <h2>Favoris</h2>
   </div>
   <div *ngIf="!favoriteCitiesWeatherError">
-    <ion-spinner *ngIf="!favoriteCitiesWeather" name="bubbles" class="spinner-calm"></ion-spinner>
+    <ion-spinner *ngIf="!favoriteCitiesWeather" name="bubbles"></ion-spinner>
+    <p *ngIf="favoriteCitiesWeather?.length === 0" class="emptyList">Aucune ville favorite sélectionnée</p>
     <div *ngFor="let city of favoriteCitiesWeather; let i = index">
         <weather-min
           #weatherMinComponent
@@ -37,4 +38,7 @@
     </div>
   </div>
   <p *ngIf="favoriteCitiesWeatherError" class="error">Erreur lors de la récupération des informations météo</p>
+  <ion-fab right bottom>
+    <button ion-fab id="addButton" (click)="openAddModal()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 </ion-content>

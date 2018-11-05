@@ -2,6 +2,7 @@
   display: inline-block;
   vertical-align: middle;
   background-image: none!important;
+  background-color: color($colors, secondaryLight);
 }
 
 .weather-min-image {
@@ -21,4 +22,8 @@
 .cityName {
   font-size: 2rem!important;
   font-weight: bold!important;
+}
+
+.weather-min-temp {
+  font-size: 12pt!important;
 }

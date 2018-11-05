@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 import { Geolocation ,GeolocationOptions ,Geoposition ,PositionError } from '@ionic-native/geolocation';
 
 import {WeatherProvider} from "../../providers/weather/weather";
 import {WeatherDetailsPage} from "../weather-details/weather-details";
+import {CitySelectPage} from "../city-select/city-select";
+import {FavoriteCitiesProvider} from "../../providers/favorite-cities/favorite-cities";
 
 @Component({
   selector: 'page-home',
@@ -20,7 +22,7 @@ export class HomePage {
   localWeatherError: string;
   favoriteCitiesWeatherError: string;
 
-  constructor(public navCtrl: NavController, public weather: WeatherProvider, private geolocation: Geolocation) {
+  constructor(public navCtrl: NavController, public weather: WeatherProvider, private geolocation: Geolocation, public modalCtrl: ModalController, public favoriteCities: FavoriteCitiesProvider) {
 
   }
 
@@ -53,10 +55,15 @@ export class HomePage {
   }
 
   getFavoriteCitiesWeather(){
-    this.weather.getCitiesWeather(['524901','703448','2643743'])
-      .subscribe(
-        citiesWeather => this.favoriteCitiesWeather = citiesWeather.list,
-        error => this.favoriteCitiesWeatherError = <any>error);
+    this.favoriteCities.getAllFavoriteCities().then( favoriteCities => {
+      if(favoriteCities.length > 0)
+        this.weather.getCitiesWeather(favoriteCities)
+          .subscribe(
+            citiesWeather => this.favoriteCitiesWeather = citiesWeather.list,
+            error => this.favoriteCitiesWeatherError = <any>error);
+      else
+        this.favoriteCitiesWeather = [];
+    });
   }
 
   itemClick(item){
@@ -65,5 +72,13 @@ export class HomePage {
     } else {
       this.navCtrl.push(WeatherDetailsPage, {weatherInfos: this.favoriteCitiesWeather[item]});
     }
+  }
+
+  openAddModal(){
+    let addModal = this.modalCtrl.create(CitySelectPage);
+    addModal.onDidDismiss(() => {
+      this.getFavoriteCitiesWeather();
+    });
+    addModal.present();
   }
 }

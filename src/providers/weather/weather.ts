@@ -3,12 +3,6 @@ import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
 import {catchError, map} from "rxjs/operators";
 
-/*
-  Generated class for the WeatherProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class WeatherProvider {
 
